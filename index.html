@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>happy birthday, mia ♡</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Nunito", sans-serif;
+            background: linear-gradient(135deg, #ffdce9, #e9ddff, #fff1d6);
+            color: #654d68;
+            overflow-x: hidden;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            position: relative;
+        }
+
+        .box {
+            width: 100%;
+            max-width: 550px;
+            padding: 35px 25px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.78);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(116, 80, 130, 0.15);
+            backdrop-filter: blur(8px);
+            animation: popIn 0.8s ease;
+        }
+
+        h1,
+        h2,
+        h3,
+        button,
+        .decor,
+        .envelope {
+            font-family: "Baloo 2", sans-serif;
+        }
+
+        h1 {
+            margin: 10px 0;
+            font-size: clamp(32px, 8vw, 52px);
+            line-height: 1.05;
+            color: #9b6ba8;
+        }
+
+        h2 {
+            font-size: 34px;
+            color: #9b6ba8;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .small {
+            font-size: 14px;
+            opacity: 0.75;
+        }
+
+        .decor {
+            font-size: 25px;
+            color: #d59bc8;
+            letter-spacing: 8px;
+        }
+
+        input {
+            width: 100%;
+            max-width: 280px;
+            padding: 13px 18px;
+            margin: 10px 0;
+            border: 2px solid #e8cce5;
+            border-radius: 30px;
+            outline: none;
+            text-align: center;
+            font-family: "Nunito", sans-serif;
+            font-size: 16px;
+            color: #654d68;
+            background: #fffafd;
+        }
+
+        input:focus {
+            border-color: #c99bd0;
+        }
+
+        button {
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            background: #d9afd9;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: 0.25s;
+            animation: buttonGlow 2s ease-in-out infinite;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #c996ca;
+        }
+
+        button:active {
+            transform: scale(0.96);
+        }
+
+        #wrong {
+            display: none;
+            color: #bd7189;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #hint {
+            cursor: pointer;
+            color: #a477ad;
+            margin-bottom: 0;
+        }
+
+        #hintText {
+            display: none;
+        }
+
+
+        /* birthday page */
+
+        #birthday {
+            display: none;
+        }
+
+        .birthday-title {
+            font-size: clamp(38px, 10vw, 65px);
+            margin: 0;
+            color: #9b6ba8;
+        }
+
+        .birthday-text {
+            max-width: 430px;
+            margin: auto;
+        }
+
+        .cake {
+            font-size: 85px;
+            margin: 10px 0;
+            animation: cakeBounce 2s ease-in-out infinite;
+        }
+
+        .rainbow {
+            font-size: 70px;
+            margin: 5px 0 15px;
+            animation: rainbowFloat 3s ease-in-out infinite;
+        }
+
+        .envelope {
+            font-size: 75px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 15px;
+            transition: 0.3s;
+            animation: envelopeFloat 2s ease-in-out infinite;
+        }
+
+        .envelope:hover {
+            transform: scale(1.12) rotate(-3deg);
+        }
+
+
+        /* letter */
+
+        #letter {
+            display: none;
+            margin-top: 25px;
+            text-align: left;
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 25px;
+            background: #fffafc;
+            border-radius: 22px;
+            border: 2px solid #f0d7e9;
+            animation: letterOpen 0.8s ease;
+        }
+
+        #letter::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        #letter::-webkit-scrollbar-thumb {
+            background: #d9afd9;
+            border-radius: 20px;
+        }
+
+        #letter p {
+            margin: 0 0 18px;
+        }
+
+        .letter-title {
+            text-align: center;
+            color: #9b6ba8;
+            font-family: "Baloo 2", sans-serif;
+            font-size: 30px;
+        }
+
+
+        /* final surprise */
+
+        #secret {
+            display: none;
+            margin-top: 25px;
+            animation: secretAppear 0.8s ease;
+        }
+
+        .heart-photo {
+            width: 100%;
+            max-width: 330px;
+            border-radius: 25px;
+            margin-top: 15px;
+            box-shadow: 0 10px 25px rgba(120, 80, 130, 0.18);
+        }
+
+        .secret-text {
+            font-size: 18px;
+            color: #8d638f;
+        }
+
+
+        /* floating decorations */
+
+        .sparkle {
+            position: fixed;
+            bottom: -30px;
+            color: white;
+            font-family: "Baloo 2", sans-serif;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 1;
+            animation: sparkleFloat 6s linear infinite;
+        }
+
+        .heart {
+            position: fixed;
+            bottom: -30px;
+            font-family: "Baloo 2", sans-serif;
+            font-size: 22px;
+            pointer-events: none;
+            z-index: 10;
+            animation: heartFloat 5s linear forwards;
+        }
+
+
+        /* animations */
+
+        @keyframes popIn {
+
+            0% {
+                opacity: 0;
+                transform: scale(0.88) translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+
+        }
+
+        @keyframes sparkleFloat {
+
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+
+        }
+
+        @keyframes buttonGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 5px 15px rgba(150, 100, 180, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 5px 25px rgba(220, 130, 190, 0.45);
+            }
+
+        }
+
+        @keyframes cakeBounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+        }
+
+        @keyframes rainbowFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(2deg);
+            }
+
+        }
+
+        @keyframes envelopeFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+
+        }
+
+        @keyframes letterOpen {
+
+            0% {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @keyframes secretAppear {
+
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        }
+
+        @keyframes heartFloat {
+
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(180deg);
+                opacity: 0;
+            }
+
+        }
+
+
+        /* mobile */
+
+        @media (max-width: 480px) {
+
+            .page {
+                padding: 15px;
+            }
+
+            .box {
+                padding: 28px 18px;
+                border-radius: 25px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 29px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+
+            .cake {
+                font-size: 70px;
+            }
+
+            .rainbow {
+                font-size: 60px;
+            }
+
+            .envelope {
+                font-size: 65px;
+            }
+
+            #letter {
+                max-height: 430px;
+                padding: 20px;
+            }
+
+            .sparkle {
+                font-size: 17px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- floating sparkles -->
+
+    <div class="sparkle" style="left: 8%; animation-delay: 0s;">✦</div>
+    <div class="sparkle" style="left: 22%; animation-delay: 2s;">✧</div>
+    <div class="sparkle" style="left: 40%; animation-delay: 1s;">☆</div>
+    <div class="sparkle" style="left: 63%; animation-delay: 3s;">✦</div>
+    <div class="sparkle" style="left: 82%; animation-delay: 1.5s;">✧</div>
+    <div class="sparkle" style="left: 94%; animation-delay: 4s;">☆</div>
+
+
+    <!-- PASSWORD PAGE -->
+
+    <section class="page" id="passwordPage">
+
+        <div class="box">
+
+            <div class="decor">
+                ✦ ☆ ✧ ☆ ✦
+            </div>
+
+            <h1>
+                happy birthday<br>
+                my stinky gelly ♡
+            </h1>
+
+            <p>
+                pookieee, i made something very special for you :33
+            </p>
+
+            <p class="small">
+                there's something waiting for you inside...
+            </p>
+
+            <p>
+                <b>but first, prove you're the birthday girl ♡</b>
+            </p>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="enter password"
+            >
+
+            <br>
+
+            <button onclick="checkPassword()">
+                unlock ♡
+            </button>
+
+            <p id="wrong">
+                wrong gelly try again 😛
+            </p>
+
+            <p id="hint" onclick="showHint()">
+                ♡ need a hint?
+            </p>
+
+            <p id="hintText" class="small">
+                it's the day your birthday happens... 🎂
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- BIRTHDAY PAGE -->
+
+    <section class="page" id="birthday">
+
+        <div class="box">
+
+            <div class="decor">
+                ✦ ✧ ☆ ✧ ✦
+            </div>
+
+            <h1 class="birthday-title">
+                HAPPY BIRTHDAY!!
+            </h1>
+
+            <div class="cake">
+                🎂
+            </div>
+
+            <!-- the rainbow is intentionally only here -->
+
+            <div class="rainbow">
+                🌈
+            </div>
+
+            <p class="birthday-text">
+                happy birthday to my favorite stinky gelly,
+                my rainbow gel pen in a world full of black and blue pens,
+                and my platonic soulmate :'))
+            </p>
+
+            <p>
+                i made something for you...
+            </p>
+
+            <div
+                class="envelope"
+                onclick="openLetter()"
+                title="open me"
+            >
+                💌
+            </div>
+
+            <p class="small">
+                click the envelope ♡
+            </p>
+
+
+            <!-- LETTER -->
+
+            <div id="letter">
+
+                <h2 class="letter-title">
+                    for my mia ♡
+                </h2>
+
+                <p>
+                    happy birthday, mia :’))
+                </p>
+
+                <p>
+                    six years. almost six whole years of knowing you, which is actually crazy to think about. somehow, through all the years, all the random conversations, late nights, games, stupid jokes, and everything that has happened in between, we’re still here. i don’t think i’ll ever be able to properly explain how special that is to me. we started as two people who happened to meet online, and somehow you became one of those people who feels like they’ve been a part of my life forever.
+                </p>
+
+                <p>
+                    you really are my rainbow gel pen in a world full of black and blue pens. you’re just different in the best way possible. there’s something about you that makes everything feel a little more colorful, a little lighter, and a lot more fun. even when we’re literally just playing games together or talking about the most random things, those moments have become some of my favorite memories. some of the best nights i’ve had were just spent playing games with you, talking for hours, laughing over things that probably wouldn’t even be funny to anyone else, or just being there together. it’s funny how the simplest moments can become the ones you remember the most.
+                </p>
+
+                <p>
+                    i’m really grateful that our friendship has never felt like something i had to force. we can talk about absolutely nothing and somehow still have the best conversations. we can disappear into our own lives and come back like nothing changed. we’ve seen different versions of each other over the years, and somehow we’ve continued to grow alongside each other. six years is a lot of time, and i think that makes our friendship even more special because we’ve gotten to know each other through so many different phases of life.
+                </p>
+
+                <p>
+                    and i hope you know that i see how much you’ve been through too. i know there have been days that weren’t easy, moments that hurt, and times when things probably felt heavier than you wanted them to. i hope you never forget that you deserve the same kindness and understanding that you give to other people. you deserve to have people around you who make you feel safe to be yourself, who celebrate you, who listen to you, and who stay even when things aren’t perfect. i hope this new year of your life brings more of those people and more of those moments to you.
+                </p>
+
+                <p>
+                    i hope october is gentle with you. i hope this month gives you reasons to smile for no particular reason, nights that become memories, little surprises that make your day better, and moments where you stop and realize that life can actually be really beautiful. i hope the things you’ve been quietly wishing for find their way to you, even if they take a little longer than expected. and when life gets difficult again, i hope you remember that difficult days don’t define the whole story.
+                </p>
+
+                <p>
+                    i also hope you know how loved you are. not just because it’s your birthday, but because you genuinely deserve to know it. you have such a special place in my life, and i hope you realize that our friendship means just as much to me as i hope it means to you. i love all the little things that make you you, even the things you might not think are important. i love our random chats, our games, our stupid conversations, our little inside jokes, and the way somehow we can always find something to talk about.
+                </p>
+
+                <p>
+                    we’ve been there for each other through some of our worst moments, but i don’t want our friendship to only be remembered for the difficult parts. i want us to have so many more good memories that eventually those hard days just become tiny pieces of a much bigger story. i want more games, more late-night conversations, more random messages, more laughing until we can’t breathe, more “remember when” moments years from now. i want us to keep growing and changing and still somehow finding our way back to each other.
+                </p>
+
+                <p>
+                    sometimes i genuinely think of you as my platonic soulmate. there’s a song by olivia rodrigo that reminds me of us so much because of that feeling of growing up and changing while still hoping that some friendships stay the same. we’ve both changed so much since we met, but somehow we’re still us. and the fact that we’re both Angelicas in our own way makes me laugh because out of all the people i could have met online, of course my platonic soulmate would have Angelica in her name too. maybe that’s just another little coincidence that makes our friendship feel even more special to me. i really hope one day we get to meet in person and finally turn all these years of online memories into real ones. i’m genuinely looking forward to that day, whenever it happens.
+                </p>
+
+                <p>
+                    and mia, i really hope you know that i’d choose you as my friend over and over again. through every version of us, every awkward phase, every change, every distance, every stupid argument, every good day and every terrible one. you’re my ride or die, genuinely :33. if life takes us in completely different directions someday, i still hope there will always be a little part of us that remembers these years and thinks, “yeah, that was my person.” because you are one of my people. i don’t want you to ever question whether you mattered to me or whether this friendship was real, because it is. it always has been. i love you in the very special way that you love someone who has grown alongside you, someone who has seen pieces of you that other people never got to see, and someone you can’t imagine your story without. and if we really do grow old and look back at all of this someday, i hope we’re still laughing about the same stupid things and saying, “remember when we were just two idiots on the internet?” :’))
+                </p>
+
+                <p>
+                    i’m also sorry that all i can give you right now is a little letter on a screen. i wish i could give you something that could properly show you how much i appreciate you, but for now, i hope these words are enough to remind you that you matter so much to me. i hope you know that every word here comes from a place of genuine love and appreciation for our friendship. more than anything, i just want you to be happy today. i want you to feel celebrated, appreciated, and loved because you deserve that.
+                </p>
+
+                <p>
+                    six years ago, i obviously had no idea that meeting you online would eventually give me a friendship like this. i didn’t know that some random person on the internet would become someone i’d still be talking to years later. i didn’t know we’d become two peas in a pod, or that you’d become my rainbow gel pen in a world full of black and blue pens. but i’m really, really glad it happened.
+                </p>
+
+                <p>
+                    so today, i hope you let yourself celebrate. celebrate the person you’ve become, everything you’ve survived, everything you’ve learned, and everything that is still waiting for you. you’ve made it through another year, and i hope the next one is softer, happier, and full of things that make you genuinely excited to wake up every day. i hope you get everything you want in life, even the things you haven’t told anyone about yet. i hope you get the life you dream about and so much more than you think you deserve.
+                </p>
+
+                <p>
+                    happy birthday, mia. &lt;33
+                </p>
+
+                <p>
+                    thank you for almost six years of friendship, for every game, every conversation, every stupid little moment, and every version of us that got us here. thank you for being you and for letting me be me too.
+                </p>
+
+                <p>
+                    here’s to another year of you, another year of us, and hopefully many, many more years of this friendship.
+                </p>
+
+                <p>
+                    i love you so much, mia. happy birthday, my rainbow gel pen, my platonic soulmate, my ride or die, and my forever two-peas-in-a-pod person :’))
+                </p>
+
+
+                <div style="text-align:center; margin-top:25px;">
+
+                    <button onclick="showSecret()">
+                        one more thing ♡
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- FINAL SURPRISE -->
+
+            <div id="secret">
+
+                <div class="decor">
+                    ✦ ✧ ☆ ✧ ✦
+                </div>
+
+                <h2>
+                    waittt... there's one more thing
+                </h2>
+
+                <p class="secret-text">
+                    because a letter on a screen could never be enough for my stinky gelly ♡
+                </p>
+
+            
+
+                <img
+                    src="assets/mia-heart.png.png"
+                    alt="a birthday surprise"
+                    class="heart-photo"
+                >
+
+                <p class="secret-text">
+                    one day, i hope this isn't just an online friendship anymore.
+                    i can't wait until we can finally make memories in the same place :'))
+                </p>
+
+                <p>
+                    <b>
+                        happy birthday, pookie. i love you forever and ever &lt;33
+                    </b>
+                </p>
+
+                <div class="decor">
+                    ♡ ✦ ♡ ✧ ♡
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <script>
+
+        function checkPassword() {
+
+            var password = document.getElementById("password").value;
+            var wrong = document.getElementById("wrong");
+
+            if (password === "1007") {
+
+                document.getElementById("passwordPage").style.display = "none";
+
+                document.getElementById("birthday").style.display = "flex";
+
+                wrong.style.display = "none";
+
+                createHearts();
+
+            } else {
+
+                wrong.style.display = "block";
+
+            }
+
+        }
+
+
+        function showHint() {
+
+            document.getElementById("hintText").style.display = "block";
+
+        }
+
+
+        function openLetter() {
+
+            document.getElementById("letter").style.display = "block";
+
+            var envelope = document.querySelector(".envelope");
+
+            envelope.innerHTML = "💖";
+
+            envelope.style.animation = "none";
+
+            envelope.style.pointerEvents = "none";
+
+            createHearts();
+
+        }
+
+
+        function showSecret() {
+
+            document.getElementById("secret").style.display = "block";
+
+            createHearts();
+
+            setTimeout(function() {
+
+                document.getElementById("secret").scrollIntoView({
+                    behavior: "smooth"
+                });
+
+            }, 100);
+
+        }
+
+
+        function createHearts() {
+
+            for (var i = 0; i < 18; i++) {
+
+                var heart = document.createElement("div");
+
+                heart.className = "heart";
+
+                var symbols = [
+                    "♡",
+                    "♥",
+                    "✦",
+                    "✧",
+                    "☆"
+                ];
+
+                heart.innerHTML =
+                    symbols[Math.floor(Math.random() * symbols.length)];
+
+                heart.style.left =
+                    Math.random() * 100 + "%";
+
+                heart.style.animationDelay =
+                    Math.random() * 2 + "s";
+
+                heart.style.fontSize =
+                    (15 + Math.random() * 15) + "px";
+
+                document.body.appendChild(heart);
+
+                setTimeout(function() {
+
+                    if (heart.parentNode) {
+                        heart.remove();
+                    }
+
+                }, 7000);
+
+            }
+
+        }
+
+
+        document.getElementById("password").addEventListener("keydown", function(event) {
+
+            if (event.key === "Enter") {
+
+                checkPassword();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
